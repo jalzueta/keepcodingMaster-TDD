@@ -11,7 +11,9 @@
 		59AB1EFD1B1E548F00708B8A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB1EFC1B1E548F00708B8A /* AppDelegate.m */; };
 		59AB1EFF1B1E548F00708B8A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59AB1EFE1B1E548F00708B8A /* Images.xcassets */; };
 		59AB1F021B1E548F00708B8A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59AB1F001B1E548F00708B8A /* LaunchScreen.xib */; };
-		59AB1F0E1B1E548F00708B8A /* WalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB1F0D1B1E548F00708B8A /* WalletTests.m */; };
+		59AB1F191B1E55CA00708B8A /* FLGEuroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB1F181B1E55CA00708B8A /* FLGEuroTests.m */; };
+		59AB1F201B1E57BC00708B8A /* FLGEuro.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB1F1F1B1E57BC00708B8A /* FLGEuro.m */; };
+		59AB1F211B1E58B900708B8A /* FLGEuro.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB1F1F1B1E57BC00708B8A /* FLGEuro.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +36,9 @@
 		59AB1F011B1E548F00708B8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		59AB1F071B1E548F00708B8A /* WalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59AB1F0C1B1E548F00708B8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		59AB1F0D1B1E548F00708B8A /* WalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletTests.m; sourceTree = "<group>"; };
+		59AB1F181B1E55CA00708B8A /* FLGEuroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLGEuroTests.m; sourceTree = "<group>"; };
+		59AB1F1E1B1E57BC00708B8A /* FLGEuro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLGEuro.h; sourceTree = "<group>"; };
+		59AB1F1F1B1E57BC00708B8A /* FLGEuro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLGEuro.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 				59AB1EFC1B1E548F00708B8A /* AppDelegate.m */,
 				59AB1EFE1B1E548F00708B8A /* Images.xcassets */,
 				59AB1F001B1E548F00708B8A /* LaunchScreen.xib */,
+				59AB1F1A1B1E578C00708B8A /* Models */,
 				59AB1EF71B1E548F00708B8A /* Supporting Files */,
 			);
 			path = Wallet;
@@ -97,7 +102,7 @@
 		59AB1F0A1B1E548F00708B8A /* WalletTests */ = {
 			isa = PBXGroup;
 			children = (
-				59AB1F0D1B1E548F00708B8A /* WalletTests.m */,
+				59AB1F171B1E55AF00708B8A /* Models */,
 				59AB1F0B1B1E548F00708B8A /* Supporting Files */,
 			);
 			path = WalletTests;
@@ -109,6 +114,23 @@
 				59AB1F0C1B1E548F00708B8A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		59AB1F171B1E55AF00708B8A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				59AB1F181B1E55CA00708B8A /* FLGEuroTests.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		59AB1F1A1B1E578C00708B8A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				59AB1F1E1B1E57BC00708B8A /* FLGEuro.h */,
+				59AB1F1F1B1E57BC00708B8A /* FLGEuro.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +234,7 @@
 			files = (
 				59AB1EFD1B1E548F00708B8A /* AppDelegate.m in Sources */,
 				59AB1EFA1B1E548F00708B8A /* main.m in Sources */,
+				59AB1F201B1E57BC00708B8A /* FLGEuro.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +242,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59AB1F0E1B1E548F00708B8A /* WalletTests.m in Sources */,
+				59AB1F211B1E58B900708B8A /* FLGEuro.m in Sources */,
+				59AB1F191B1E55CA00708B8A /* FLGEuroTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
