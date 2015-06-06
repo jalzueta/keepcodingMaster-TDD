@@ -56,15 +56,24 @@
 }
 
 #pragma mark - FLGWalletTableViewController
-- (void) testThatTableHasOneSection{
+- (void) testThatNumberOfSectionsIsNumberOfCurrenciesPlusOne{
     
     NSUInteger sections = [self.walletVC numberOfSectionsInTableView:nil];
     
-    XCTAssertEqual(sections, 1, @"The number of sections should be one");
+    XCTAssertEqual(sections, self.walletVC.model.currencies.count + 1, @"The number of sections should be the number of currencies plus one");
 }
 
-- (void) testThatNumberOfCellsIsNumberOfMoneysPlusOne{
-    XCTAssertEqual(self.wallet.count + 1, [self.walletVC tableView:nil numberOfRowsInSection:0], @"Number of cells is the number of moneys plus 1 (one cell for the total)");
+- (void) testThatNumberOfCellsInSectionForAGivenCurrencyIsTheNumberOfMoneysOfThatCurrency{
+    
+    [self.wallet addMoney:[FLGMoney dollarWithAmount:20]];
+    [self.wallet addMoney:[FLGMoney euroWithAmount:5]];
+    [self.wallet addMoney:[FLGMoney euroWithAmount:10]];
+    
+    for (int i=0; i < [self.walletVC numberOfSectionsInTableView:nil] - 1; i++) {
+        NSUInteger numberOfMoneysForSection = [self.wallet numberOfMoneysForSection:i];
+        
+        XCTAssertEqual(numberOfMoneysForSection, [self.walletVC tableView:nil numberOfRowsInSection:i], @"Number of cells is the number of moneys plus 1 (one cell for the total)");
+    }
 }
 
 @end

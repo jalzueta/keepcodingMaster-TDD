@@ -12,9 +12,10 @@
 
 @interface FLGWallet : NSObject<FLGMoney>
 @property (nonatomic, readonly) NSUInteger count;
+@property (nonatomic, readonly) NSMutableArray *currencies;
 
 - (id<FLGMoney>) addMoney: (FLGMoney *) other;
 - (id<FLGMoney>) takeMoney: (FLGMoney *) other;
-
+- (NSUInteger) numberOfMoneysForSection: (NSUInteger) section;
 - (void) subscribeToMemoryWarning: (NSNotificationCenter *) nc;
 @end

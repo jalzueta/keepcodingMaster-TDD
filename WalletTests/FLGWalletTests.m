@@ -61,4 +61,12 @@
     XCTAssertThrows([wallet takeMoney: [FLGMoney euroWithAmount:5]], @"Substraction of a non existing money should cause exception");
 }
 
+- (void) testNumberOfCurrencies{
+    FLGWallet *wallet = [[FLGWallet alloc]initWithAmount:20 currency: @"EUR"];
+    [wallet addMoney: [FLGMoney euroWithAmount: 10]];
+    [wallet addMoney: [FLGMoney dollarWithAmount: 10]];
+    
+    XCTAssertEqual(wallet.currencies.count, 2, @"The number of currencies in the wallet should be 2");
+}
+
 @end

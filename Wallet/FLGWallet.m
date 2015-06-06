@@ -25,6 +25,9 @@
                                                   currency:currency];
         _moneys = [NSMutableArray array];
         [_moneys addObject:money];
+        
+        _currencies = [NSMutableArray array];
+        [_currencies addObject:money.currency];
     }
     return self;
 }
@@ -41,6 +44,9 @@
 
 - (id<FLGMoney>) addMoney: (FLGMoney *) other{
     [self.moneys addObject:other];
+    if (![self.currencies containsObject:other.currency]) {
+        [self.currencies addObject:other.currency];
+    }
     return self;
 }
 
@@ -65,6 +71,24 @@
     return result;
 }
 
+- (NSString *) currencyAtIndex: (NSUInteger) index{
+    return [self.currencies objectAtIndex:index];
+}
+
+- (NSUInteger) numberOfMoneysForCurrency: (NSString *) currency{
+    NSUInteger numberOfMoneys = 0;
+    for (FLGMoney *each in self.moneys) {
+        if ([each.currency isEqual:currency]) {
+            numberOfMoneys++;
+        }
+    }
+    return numberOfMoneys;
+}
+
+- (NSUInteger) numberOfMoneysForSection: (NSUInteger) section{
+    return [self numberOfMoneysForCurrency:[self currencyAtIndex:section]];
+}
+
 - (void) subscribeToMemoryWarning: (NSNotificationCenter *) nc{
     
     [nc addObserver:self
@@ -77,5 +101,16 @@
 - (void) dumpToDisk: (NSNotification *) notification{
     // Guarda las cosas en disco cuando la cosa se pknga fea
 }
+
+#pragma mark - Overwritten
+
+- (NSString *) description{
+    NSString *desc = [NSString stringWithFormat:@"<%@\r\n", [self class]];
+    for (FLGMoney *each in self.moneys) {
+        desc = [NSString stringWithFormat:@"%@<%@: %@ %@>\r\n", desc, [each class], [each currency], [each amount]];
+    }
+    return desc;
+}
+
 
 @end

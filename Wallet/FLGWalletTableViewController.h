@@ -11,6 +11,8 @@
 
 @interface FLGWalletTableViewController : UITableViewController
 
+@property (nonatomic, strong, readonly) FLGWallet *model;
+
 - (id) initWithModel: (FLGWallet *) model;
 
 @end
