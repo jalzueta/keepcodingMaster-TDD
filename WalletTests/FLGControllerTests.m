@@ -69,10 +69,17 @@
     [self.wallet addMoney:[FLGMoney euroWithAmount:5]];
     [self.wallet addMoney:[FLGMoney euroWithAmount:10]];
     
-    for (int i=0; i < [self.walletVC numberOfSectionsInTableView:nil] - 1; i++) {
-        NSUInteger numberOfMoneysForSection = [self.wallet numberOfMoneysForSection:i];
+    NSUInteger numberOfSections = [self.walletVC numberOfSectionsInTableView:nil];
+    NSUInteger numberOfCurrencies = self.wallet.currencies.count;
+    
+    for (int i=0; i < numberOfSections; i++) {
+        NSUInteger numberOfRowsForSection = [self.wallet numberOfMoneysForSection:i];
+        if (i < numberOfCurrencies) {
+            XCTAssertEqual(numberOfRowsForSection, [self.walletVC tableView:nil numberOfRowsInSection:i], @"Number of cells is the number of moneys plus 1");
+        }else{
+            XCTAssertEqual(numberOfRowsForSection, 1, @"Number of cells is 1 (one cell for the total)");
+        }
         
-        XCTAssertEqual(numberOfMoneysForSection, [self.walletVC tableView:nil numberOfRowsInSection:i], @"Number of cells is the number of moneys plus 1 (one cell for the total)");
     }
 }
 

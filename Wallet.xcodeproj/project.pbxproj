@@ -115,12 +115,12 @@
 		59AB1EF61B1E548F00708B8A /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				59AB1F5F1B21FA0A00708B8A /* Controllers */,
-				59AB1F2C1B1E6CE900708B8A /* Categories */,
 				59AB1EFB1B1E548F00708B8A /* AppDelegate.h */,
 				59AB1EFC1B1E548F00708B8A /* AppDelegate.m */,
 				59AB1EFE1B1E548F00708B8A /* Images.xcassets */,
 				59AB1F001B1E548F00708B8A /* LaunchScreen.xib */,
+				59AB1F5F1B21FA0A00708B8A /* Controllers */,
+				59AB1F2C1B1E6CE900708B8A /* Categories */,
 				59AB1F1A1B1E578C00708B8A /* Models */,
 				59AB1EF71B1E548F00708B8A /* Supporting Files */,
 			);

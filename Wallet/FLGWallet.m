@@ -86,7 +86,11 @@
 }
 
 - (NSUInteger) numberOfMoneysForSection: (NSUInteger) section{
-    return [self numberOfMoneysForCurrency:[self currencyAtIndex:section]];
+    if (section < self.currencies.count) {
+        return [self numberOfMoneysForCurrency:[self currencyAtIndex:section]];
+    }else{
+        return 1;
+    }
 }
 
 - (void) subscribeToMemoryWarning: (NSNotificationCenter *) nc{
