@@ -21,14 +21,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-//    FLGWallet *wallet = [[FLGWallet alloc] initWithAmount:10 currency:@"EUR"];
-//    [wallet addMoney:[FLGMoney euroWithAmount:5]];
-//    [wallet addMoney:[FLGMoney euroWithAmount:20]];
-//    [wallet addMoney:[FLGMoney dollarWithAmount:10]];
-//    [wallet addMoney:[FLGMoney dollarWithAmount:10]];
-//    [wallet addMoney:[FLGMoney dollarWithAmount:50]];
-//    
-//    self.window.rootViewController = [[FLGWalletTableViewController alloc] initWithModel: wallet];
+    FLGWallet *wallet = [[FLGWallet alloc] initWithAmount:10 currency:@"EUR"];
+    [wallet addMoney:[FLGMoney euroWithAmount:5]];
+    [wallet addMoney:[FLGMoney euroWithAmount:20]];
+    [wallet addMoney:[FLGMoney euroWithAmount:50]];
+    [wallet addMoney:[FLGMoney dollarWithAmount:10]];
+    [wallet addMoney:[FLGMoney dollarWithAmount:10]];
+    [wallet addMoney:[FLGMoney dollarWithAmount:50]];
+    
+    self.window.rootViewController = [[FLGWalletTableViewController alloc] initWithModel: wallet];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
