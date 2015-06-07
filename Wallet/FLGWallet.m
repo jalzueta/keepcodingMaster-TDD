@@ -7,6 +7,7 @@
 //
 
 #import "FLGWallet.h"
+#import "FLGBroker.h"
 
 @interface FLGWallet ()
 @property (nonatomic, strong) NSMutableArray *moneys;
@@ -71,8 +72,11 @@
     return result;
 }
 
-- (NSString *) currencyAtIndex: (NSUInteger) index{
-    return [self.currencies objectAtIndex:index];
+- (NSString *) currencyForSection: (NSUInteger) section{
+    if (section < self.currencies.count) {
+        return [self.currencies objectAtIndex:section];
+    }
+    return @"";
 }
 
 - (NSUInteger) numberOfMoneysForCurrency: (NSString *) currency{
@@ -85,11 +89,85 @@
     return numberOfMoneys;
 }
 
+- (NSUInteger) totalNumberOfCurrencies{
+    return self.currencies.count;
+}
+
 - (NSUInteger) numberOfMoneysForSection: (NSUInteger) section{
-    if (section < self.currencies.count) {
-        return [self numberOfMoneysForCurrency:[self currencyAtIndex:section]];
+    return [self numberOfMoneysForCurrency:[self currencyForSection:section]];
+}
+
+- (FLGMoney *) moneyForIndexPath: (NSIndexPath *) indexPath
+                reduceToCurrency:(NSString *) currency
+                      withBroker:(FLGBroker *)broker{
+    
+    if (indexPath.section < self.currencies.count) {
+        // No es la seccion con el total
+        if (indexPath.row < [self numberOfMoneysForSection:indexPath.section]) {
+            // No es la ultima celda, la del subtotal
+            NSString *desiredCurrency = [self.currencies objectAtIndex:indexPath.section];
+            NSInteger moneyPlace = indexPath.row;
+            NSInteger moneysFoundForDesiredCurrency = 0;
+            FLGMoney *desiredMoney;
+            for (FLGMoney *each in self.moneys) {
+                if ([each.currency isEqual:desiredCurrency]) {
+                    if (moneysFoundForDesiredCurrency == moneyPlace) {
+                        desiredMoney = each;
+                        break;
+                    }
+                    moneysFoundForDesiredCurrency++;
+                }
+            }
+            if (!currency) {
+                currency = desiredMoney.currency;
+            }
+            return [desiredMoney reduceToCurrency:currency
+                                       withBroker:broker];
+        }else{
+            // Es la ultima celda, la del subtotal
+            NSString *desiredCurrency = [self.currencies objectAtIndex:indexPath.section];
+            FLGMoney *total = [[FLGMoney alloc] initWithAmount:0 currency:desiredCurrency];
+            for (FLGMoney *each in self.moneys) {
+                if ([each.currency isEqual:desiredCurrency]) {
+                    total = [total plus:[each reduceToCurrency:desiredCurrency withBroker:broker]];
+                }
+            }
+            return total;
+        }
     }else{
-        return 1;
+        // Es la seccion con el total
+        if (!currency) {
+            currency = [self.currencies firstObject];
+            if (!currency) {
+                currency = @"USD";
+            }
+        }
+        FLGMoney *total = [[FLGMoney alloc] initWithAmount:0 currency:currency];
+        for (FLGMoney *each in self.moneys) {
+            total = [total plus:[each reduceToCurrency:currency withBroker:broker]];
+        }
+        return total;
+    }
+}
+
+- (FLGMoney *) totalMoneyForCurrency: (NSString *) currency{
+    
+    FLGMoney *total = [[FLGMoney alloc] initWithAmount:0
+                                              currency:currency];
+    for (FLGMoney *each in self.moneys) {
+        if ([each.currency isEqual:currency]) {
+            total = [total plus:each];
+        }
+    }
+    return total;
+}
+
+- (FLGMoney *) totalMoneyForSection: (NSUInteger) section{
+    
+    if (section < self.currencies.count){
+        return [self totalMoneyForCurrency:[self.currencies objectAtIndex:section]];
+    }else{
+        return nil;
     }
 }
 

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 @class FLGWallet;
+@class FLGBroker;
 
 @interface FLGWalletTableViewController : UITableViewController
 
-@property (nonatomic, strong, readonly) FLGWallet *model;
+@property (nonatomic, strong, readonly) FLGWallet *wallet;
 
-- (id) initWithModel: (FLGWallet *) model;
+- (id) initWithWallet: (FLGWallet *) wallet
+               broker: (FLGBroker *) broker;
 
 @end

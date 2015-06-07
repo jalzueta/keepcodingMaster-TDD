@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FLGWallet.h"
 #import "FLGWalletTableViewController.h"
+#import "FLGBroker.h"
 
 @interface AppDelegate ()
 
@@ -22,14 +23,17 @@
     // Override point for customization after application launch.
     
     FLGWallet *wallet = [[FLGWallet alloc] initWithAmount:10 currency:@"EUR"];
-    [wallet addMoney:[FLGMoney euroWithAmount:5]];
+    [wallet addMoney:[FLGMoney euroWithAmount:100]];
     [wallet addMoney:[FLGMoney euroWithAmount:20]];
     [wallet addMoney:[FLGMoney euroWithAmount:50]];
     [wallet addMoney:[FLGMoney dollarWithAmount:10]];
     [wallet addMoney:[FLGMoney dollarWithAmount:10]];
     [wallet addMoney:[FLGMoney dollarWithAmount:50]];
     
-    self.window.rootViewController = [[FLGWalletTableViewController alloc] initWithModel: wallet];
+    FLGBroker *broker = [FLGBroker new];
+    [broker addRate: 2 fromCurrency: @"USD" toCurrency: @"EUR"];
+    
+    self.window.rootViewController = [[FLGWalletTableViewController alloc] initWithWallet: wallet broker: broker];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

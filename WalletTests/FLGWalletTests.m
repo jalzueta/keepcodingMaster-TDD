@@ -66,7 +66,31 @@
     [wallet addMoney: [FLGMoney euroWithAmount: 10]];
     [wallet addMoney: [FLGMoney dollarWithAmount: 10]];
     
-    XCTAssertEqual(wallet.currencies.count, 2, @"The number of currencies in the wallet should be 2");
+    XCTAssertEqual([wallet totalNumberOfCurrencies], 2, @"The number of currencies in the wallet should be 2");
+}
+
+- (void) testTotalMoneyForAGivenCurrency{
+    
+    NSInteger initialAmount = 20;
+    
+    FLGMoney *euro1 = [FLGMoney euroWithAmount: initialAmount];
+    FLGMoney *euro2 = [FLGMoney euroWithAmount: 10];
+    FLGMoney *dollar1 = [FLGMoney dollarWithAmount: 10];
+    FLGMoney *dollar2 = [FLGMoney dollarWithAmount: 50];
+    FLGMoney *dollar3 = [FLGMoney dollarWithAmount: 5];
+    
+    FLGWallet *wallet = [[FLGWallet alloc]initWithAmount:initialAmount currency: @"EUR"];
+    
+    [wallet addMoney: euro2];
+    [wallet addMoney: dollar1];
+    [wallet addMoney: dollar2];
+    [wallet addMoney: dollar3];
+    
+    FLGMoney *totalEuros = [euro1 plus:euro2];
+    FLGMoney *totalDollars = [(FLGMoney *)[dollar1 plus:dollar2] plus: dollar3];
+    
+    XCTAssertEqualObjects([wallet totalMoneyForCurrency: euro1.currency], totalEuros, @"Total money for a given currency should be the same");
+    XCTAssertEqualObjects([wallet totalMoneyForCurrency: dollar1.currency], totalDollars, @"Total money for a given currency should be the same");
 }
 
 @end
